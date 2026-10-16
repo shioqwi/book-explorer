@@ -75,8 +75,8 @@ export default function App() {
 
         {!isLoading && !error && books.length > 0 && (
           <div className="book-grid">
-            {books.map((book) => (
-              <BookCard key={book.key} book={book} onSelectBook={setSelectedBook} />
+            {books.map((book, index) => (
+              <BookCard key={book.key || index} book={book} onSelectBook={setSelectedBook} />
             ))}
           </div>
         )}
