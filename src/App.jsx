@@ -4,14 +4,16 @@ import BookCard from './components/BookCard';
 import BookDetailModal from './components/BookDetailModal';
 
 export default function App() {
-  const [query, setQuery] = useState('dune');
-  const [activeQuery, setActiveQuery] = useState('dune');
+  // searchh''
+  const [query, setQuery] = useState('');
+  const [activeQuery, setActiveQuery] = useState('');
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedBook, setSelectedBook] = useState(null);
 
   useEffect(() => {
+    // search
     if (!activeQuery.trim()) return;
 
     const fetchBooks = async () => {
@@ -65,7 +67,16 @@ export default function App() {
           </div>
         )}
 
-        {!isLoading && !error && books.length === 0 && (
+        {/* State mess */}
+        {!isLoading && !error && !activeQuery && (
+          <div className="status-container">
+            <p className="font-heading" style={{ fontSize: '1.2rem', color: 'var(--text-muted)' }}>
+              Type a title or author above to start exploring! 📚✨
+            </p>
+          </div>
+        )}
+
+        {!isLoading && !error && activeQuery && books.length === 0 && (
           <div className="status-container">
             <p className="font-heading" style={{ fontSize: '1.2rem', color: 'var(--text-muted)' }}>
               No books found. Try another search! 🔍
